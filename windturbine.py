@@ -150,6 +150,9 @@ ax224 = fig.add_subplot(224,projection='3d')
 # the one with suffix "_A" contains the first half shape of the airfoil for every blade section,
 # the one with suffix "_B" contains the other half shape of the airfoil for every blade section
 def bladeddraw(c_arr,twist_arr,pivot_x,pivot_y): 
+    fig2 = plt.figure()
+    fig2.tight_layout()
+    ax111 = fig2.add_subplot(111,projection='3d')
     for j in range(bs):
         x = (shapeS822.x-pivot_x)*c_arr[j]
         y = (shapeS822.y-pivot_y)*c_arr[j]
@@ -198,9 +201,13 @@ def bladeddraw(c_arr,twist_arr,pivot_x,pivot_y):
         fn = 'output/coord_{:.2f}'.format(secr[j]) + '_B.csv'
         df.to_csv (fn, index = False, header=True, float_format='%.3f')
         print (df)
+        ax111.scatter(x2,y2,z2)
+        ax111.set_xlim3d([-50,50])
+        ax111.set_ylim3d([-50,50])
+        ax111.set_zlim3d([0,100])
 
 # Call of bladedraw with calculated chords length, angles with a specific pivot point
 bladeddraw(ci_i,results[4],0.25,0)
-
+plt.tight_layout()
 # Show the plot with cd, cl, eta and blade subplots
 plt.show()

@@ -7,9 +7,9 @@ from scipy import interpolate
 bn = 3              #Blades number [-]
 hubr = 0.05         #Hub radius [m]
 bminr = 0.15        #Blade min working radius [m]
-bmaxr = 0.5         #Blade max working radius [m] (Rotor radius)
-bs = 8              #Blade sections [-]
-uinf = 10           #Rated wind speed [m/s]
+bmaxr = 0.75        #Blade max working radius [m] (Rotor radius)
+bs = 7              #Blade sections [-]
+uinf = 9           #Rated wind speed [m/s]
 lamb =  6           #Rated lamda [-] (Omega*bmaxr/uinf)
 rho=1.225           #Air density [kg/m3]
 cilsec = True       #If true output sections are on a cilindrical surface
@@ -164,9 +164,9 @@ def bladeddraw(c_arr,twist_arr,pivot_x,pivot_y):
         for k in range(len(x1)):
             sigma[k] = x1[k]/secr[j]
             if cilsec:
-                x2[k] = secr[j]*math.sin(sigma[k])
-                y2[k] = y1[k]
-                z2[k] = secr[j]*math.cos(sigma[k])
+                x2[k] = 100*secr[j]*math.sin(sigma[k])      #100 convert the coordinate in [cm] but importing it in Fusion360
+                y2[k] = 100*y1[k]                           #leads to [mm] dimensions!!!!!
+                z2[k] = 100*secr[j]*math.cos(sigma[k])
             else:
                 x2[k] = 100*x1[k]
                 y2[k] = 100*y1[k]

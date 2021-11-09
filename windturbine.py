@@ -8,11 +8,13 @@ bn = 3              #Blades number [-]
 hubr = 0.05         #Hub radius [m]
 bminr = 0.15        #Blade min working radius [m]
 bmaxr = 0.75        #Blade max working radius [m] (Rotor radius)
-bs = 7              #Blade sections [-]
+bs = 13              #Blade sections [-]
 uinf = 9           #Rated wind speed [m/s]
 lamb =  6           #Rated lamda [-] (Omega*bmaxr/uinf)
 rho=1.225           #Air density [kg/m3]
 cilsec = True       #If true output sections are on a cilindrical surface
+pivotx = 0          #Pivot point x for airfoil rotation
+pivoty = 0          #Pivot point y for airfoil rotation
 
 # Instatntiate plot figure
 fig = plt.figure()
@@ -207,7 +209,7 @@ def bladeddraw(c_arr,twist_arr,pivot_x,pivot_y):
         ax111.set_zlim3d([0,100])
 
 # Call of bladedraw with calculated chords length, angles with a specific pivot point
-bladeddraw(ci_i,results[4],0.25,0)
+bladeddraw(ci_i,results[4],pivotx,pivoty)
 plt.tight_layout()
 # Show the plot with cd, cl, eta and blade subplots
 plt.show()
